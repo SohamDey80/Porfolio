@@ -19,8 +19,8 @@ const PROJECTS = [
     desc:
       "Interactive dashboard for product metrics with responsive layouts, dark theme, and reusable components.",
     tech: "React · Figma · Charting",
-    link: "#",
-    demo: "#", // NEW
+    details: "#", // TODO: replace with GitHub / case-study link
+    demo: "#", // TODO: replace with live demo URL
   },
   {
     title: "Fintech Mobile Web App",
@@ -28,8 +28,8 @@ const PROJECTS = [
     desc:
       "Onboarding and money-transfer flows with a mobile-first design system and clear visual hierarchy.",
     tech: "Figma · Design System",
-    link: "#",
-    demo: "#", // NEW
+    details: "#",
+    demo: "#",
   },
   {
     title: "Personal Portfolio & Brand",
@@ -37,16 +37,19 @@ const PROJECTS = [
     desc:
       "Brand language, layout system, and this portfolio experience built for recruiters and hiring managers.",
     tech: "React · CSS",
-    link: "#",
-    demo: "#", // NEW
+    details: "#",
+    demo: "#",
   },
 ];
 
-
 function App() {
+  // typewriter + nav state
   const [roleIndex, setRoleIndex] = useState(0);
+  const [typedText, setTypedText] = useState("");
+  const [isDeleting, setIsDeleting] = useState(false);
   const [mobileOpen, setMobileOpen] = useState(false);
 
+  // header shadow on scroll
   useEffect(() => {
     const onScroll = () => {
       const headerEl = document.querySelector("header");
@@ -61,15 +64,46 @@ function App() {
     return () => window.removeEventListener("scroll", onScroll);
   }, []);
 
+  // typewriter effect for roles
   useEffect(() => {
-    const id = setInterval(
-      () => setRoleIndex((prev) => (prev + 1) % ROLES.length),
-      2500
-    );
-    return () => clearInterval(id);
-  }, []);
+    const currentFullRole = ROLES[roleIndex];
 
-  const currentRole = ROLES[roleIndex];
+    const TYPING_SPEED = 110;
+    const DELETING_SPEED = 60;
+    const PAUSE_AT_END = 1100;
+    const PAUSE_AT_START = 400;
+
+    let timeoutId;
+
+    if (!isDeleting) {
+      // typing forward
+      if (typedText.length < currentFullRole.length) {
+        timeoutId = setTimeout(() => {
+          setTypedText(currentFullRole.slice(0, typedText.length + 1));
+        }, TYPING_SPEED);
+      } else {
+        // full word typed -> pause then start deleting
+        timeoutId = setTimeout(() => setIsDeleting(true), PAUSE_AT_END);
+      }
+    } else {
+      // deleting backward
+      if (typedText.length > 0) {
+        timeoutId = setTimeout(() => {
+          setTypedText(currentFullRole.slice(0, typedText.length - 1));
+        }, DELETING_SPEED);
+      } else {
+        // word fully deleted -> move to next role
+        timeoutId = setTimeout(() => {
+          setIsDeleting(false);
+          setRoleIndex((prev) => (prev + 1) % ROLES.length);
+        }, PAUSE_AT_START);
+      }
+    }
+
+    return () => clearTimeout(timeoutId);
+  }, [typedText, isDeleting, roleIndex]);
+
+  const currentRole = ROLES[roleIndex]; // used for avatar subtitle
 
   const scrollToSection = (id) => {
     const el = document.getElementById(id);
@@ -89,7 +123,7 @@ function App() {
     setMobileOpen(false);
   };
 
-  // contact form submit -> opens user's mail app with prefilled email
+  // contact form submit -> mailto
   const handleContactSubmit = (e) => {
     e.preventDefault();
     const formData = new FormData(e.target);
@@ -110,12 +144,12 @@ function App() {
 
   return (
     <div className="app">
+      {/* ================= HEADER ================= */}
       <header>
         <nav className="nav">
           <div className="nav-left">
             <div className="nav-logo">S</div>
             <div className="nav-title">
-              {/* only name here now */}
               <span className="nav-name">Soham Kumar Dey</span>
             </div>
           </div>
@@ -182,6 +216,7 @@ function App() {
         </div>
       </header>
 
+      {/* ================= MAIN ================= */}
       <main>
         <div className="shell">
           {/* HERO */}
@@ -194,7 +229,9 @@ function App() {
 
               <h1 className="hero-heading">
                 A{" "}
-                <span className="highlight role-text">{currentRole}</span>
+                <span className="highlight role-text">
+                  {typedText}
+                </span>
               </h1>
 
               <p className="hero-sub">
@@ -373,14 +410,25 @@ function App() {
                   <p className="project-desc">{project.desc}</p>
                   <div className="project-meta">
                     <span className="project-tech">{project.tech}</span>
-                    <a
-                      href={project.link}
-                      target="_blank"
-                      rel="noreferrer"
-                      className="project-link"
-                    >
-                      View details →
-                    </a>
+
+                    <div className="project-actions">
+                      <a
+                        href={project.details}
+                        target="_blank"
+                        rel="noreferrer"
+                        className="project-btn project-btn--ghost"
+                      >
+                        View Details
+                      </a>
+                      <a
+                        href={project.demo}
+                        target="_blank"
+                        rel="noreferrer"
+                        className="project-btn project-btn--primary"
+                      >
+                        Live Demo
+                      </a>
+                    </div>
                   </div>
                 </article>
               ))}
@@ -486,6 +534,7 @@ function App() {
         </div>
       </main>
 
+      {/* FOOTER */}
       <footer>
         <div className="footer-inner">
           <div className="footer-left">
@@ -575,3 +624,5 @@ function App() {
 }
 
 export default App;
+
+
