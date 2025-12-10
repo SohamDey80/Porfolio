@@ -15,7 +15,7 @@ const SKILLS = [
 ];
 
 
-const ROLES = ["UI/UX Designer", "MERN Stack Developer", "Programmer"];
+const ROLES = ["Frontend Developer", "MERN Stack Developer", "Programmer"];
 
 const PROJECTS = [
   {
@@ -25,25 +25,22 @@ const PROJECTS = [
       "A full-stack online auction system where users can list items, place real-time bids, track auctions, and manage secure transactions through a modern web interface.",
     tech: "React · Node.js · Express · MongoDB",
     details: "https://github.com/SohamDey80/Online-Action-System",
-    demo: "#",
   },
   {
     title: "Personal Portfolio",
-    role: "UI/UX · Dev",
+    role: "Frontend Developer",
     desc:
       "A modern portfolio built with React, featuring a typewriter hero, animated UI/UX orbit, project showcase, skills, and a contact section. Designed for recruiters and hiring managers.",
       tech: "React · CSS",
     details: "https://github.com/SohamDey80/Porfolio",
-    demo: "#",
   },
     {
     title: "OPD-System",
     role: "MERN · Full-Stack Development",
     desc:
       "A full-stack OPD Platform built with MERN to simplify patient appointments, doctor scheduling, and digital medical records, delivering a smooth and efficient workflow.",
-      tech: "React · Node.js · MongoDB",
+      tech: "React · Node.js · Express.js · MongoDB · REST APIs",
     details: "https://github.com/SohamDey80/OPD-System",
-    demo: "#",
   },
 ];
 
@@ -349,7 +346,7 @@ const handleContactSubmit = (e) => {
                 <p className="about-text">
                   I’m a <strong>MERN Stack Developer</strong> and <strong>frontend engineer</strong> who enjoys turning ideas into fast,
                   scalable, and user-friendly web applications. I focus heavily on
-                  <strong> clean architecture, reusable components, and modern UI/UX practices</strong>,
+                  <strong> clean architecture, reusable components, and modern frontend practices</strong>,
                   ensuring every product feels smooth, intuitive, and performance-optimized.
                 </p>
 
@@ -368,7 +365,7 @@ const handleContactSubmit = (e) => {
                 <div className="about-list">
                   <div className="badge-pill">
                     <span className="badge-dot" />
-                    1–2+ years design &amp; frontend
+                    1–2+ years frontend &amp; MERN development
                   </div>
                   <div className="badge-pill">
                     <span className="badge-dot" />
@@ -610,7 +607,7 @@ const handleContactSubmit = (e) => {
             </a>
 
             <a
-              href="https://leetcode.com/u/soham_dey80/"
+              href="https://leetcode.com/soham_dey80/"
               target="_blank"
               rel="noreferrer"
               className="social-btn social-leetcode"
