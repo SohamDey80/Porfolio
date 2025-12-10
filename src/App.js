@@ -32,12 +32,12 @@ const PROJECTS = [
     demo: "#",
   },
   {
-    title: "Personal Portfolio & Brand",
+    title: "Personal Portfolio",
     role: "UI/UX · Dev",
     desc:
-      "Brand language, layout system, and this portfolio experience built for recruiters and hiring managers.",
-    tech: "React · CSS",
-    details: "#",
+      "A modern dark-mode portfolio built with React, featuring a typewriter hero, animated UI/UX orbit, project showcase, skills, and a contact section. Designed for recruiters and hiring managers.",
+      tech: "React · CSS",
+    details: "https://github.com/SohamDey80/Porfolio",
     demo: "#",
   },
 ];
@@ -349,7 +349,7 @@ function App() {
                 <div className="about-list">
                   <div className="badge-pill">
                     <span className="badge-dot" />
-                    3–5+ years design &amp; frontend
+                    1–2+ years design &amp; frontend
                   </div>
                   <div className="badge-pill">
                     <span className="badge-dot" />
@@ -624,5 +624,3 @@ function App() {
 }
 
 export default App;
-
-
