@@ -1,43 +1,48 @@
 import React, { useEffect, useState } from "react";
+import emailjs from "emailjs-com";
 import "./index.css";
 
 const SKILLS = [
-  { name: "UI Design (Figma)", level: 90, tag: "Design Systems" },
-  { name: "UX Research", level: 82, tag: "User Flows" },
-  { name: "Interaction / Motion", level: 86, tag: "Micro-animations" },
-  { name: "React / Frontend", level: 84, tag: "SPA, Hooks" },
-  { name: "HTML / CSS / JS", level: 92, tag: "Clean Semantics" },
-  { name: "Design Handoff", level: 80, tag: "Dev-ready" },
+  { name: "React.js", level: 80, tag: "Frontend" },
+  { name: "JavaScript", level: 83, tag: "JS Core" },
+  { name: "Node.js", level: 75, tag: "Backend" },
+  { name: "Java (DSA)", level: 70, tag: "Problem Solving" },
+  { name: "Express.js", level: 74, tag: "APIs" },
+  { name: "Git & GitHub", level: 72, tag: "Version Control" },
+  { name: "REST APIs", level: 78, tag: "Integration" },
+  { name: "HTML & CSS", level: 85, tag: "Layouts" },
+  { name: "MySQL", level: 68, tag: "Database" },
 ];
+
 
 const ROLES = ["UI/UX Designer", "MERN Stack Developer", "Programmer"];
 
 const PROJECTS = [
   {
-    title: "SaaS Analytics Dashboard",
-    role: "UI/UX · Frontend",
+    title: "Online Auction System",
+    role: "MERN Stack · Full-Stack",
     desc:
-      "Interactive dashboard for product metrics with responsive layouts, dark theme, and reusable components.",
-    tech: "React · Figma · Charting",
-    details: "#", // TODO: replace with GitHub / case-study link
-    demo: "#", // TODO: replace with live demo URL
-  },
-  {
-    title: "Fintech Mobile Web App",
-    role: "UI/UX · Prototype",
-    desc:
-      "Onboarding and money-transfer flows with a mobile-first design system and clear visual hierarchy.",
-    tech: "Figma · Design System",
-    details: "#",
+      "A full-stack online auction system where users can list items, place real-time bids, track auctions, and manage secure transactions through a modern web interface.",
+    tech: "React · Node.js · Express · MongoDB",
+    details: "https://github.com/SohamDey80/Online-Action-System",
     demo: "#",
   },
   {
     title: "Personal Portfolio",
     role: "UI/UX · Dev",
     desc:
-      "A modern dark-mode portfolio built with React, featuring a typewriter hero, animated UI/UX orbit, project showcase, skills, and a contact section. Designed for recruiters and hiring managers.",
+      "A modern portfolio built with React, featuring a typewriter hero, animated UI/UX orbit, project showcase, skills, and a contact section. Designed for recruiters and hiring managers.",
       tech: "React · CSS",
     details: "https://github.com/SohamDey80/Porfolio",
+    demo: "#",
+  },
+    {
+    title: "OPD-System",
+    role: "MERN · Full-Stack Development",
+    desc:
+      "A full-stack OPD Platform built with MERN to simplify patient appointments, doctor scheduling, and digital medical records, delivering a smooth and efficient workflow.",
+      tech: "React · Node.js · MongoDB",
+    details: "https://github.com/SohamDey80/OPD-System",
     demo: "#",
   },
 ];
@@ -123,24 +128,31 @@ function App() {
     setMobileOpen(false);
   };
 
-  // contact form submit -> mailto
-  const handleContactSubmit = (e) => {
-    e.preventDefault();
-    const formData = new FormData(e.target);
-    const name = formData.get("name") || "";
-    const email = formData.get("email") || "";
-    const phone = formData.get("phone") || "";
-    const message = formData.get("message") || "";
+// contact form submit -> EmailJS
+const handleContactSubmit = (e) => {
+  e.preventDefault();
 
-    const subject = `Portfolio contact from ${name || "someone"}`;
-    const body = `Name: ${name}\nEmail: ${email}\nPhone: ${phone}\n\nMessage:\n${message}`;
+  emailjs
+    .sendForm(
+      "service_asgqth9",      // your SERVICE ID
+      "template_k8keygw",     // your TEMPLATE ID
+      e.target,               // the form element
+      "E2gL6gngwz2sEjPWX"     // your PUBLIC KEY
+    )
+    .then(
+      (result) => {
+        console.log("EmailJS SUCCESS:", result);
+        alert("✅ Message sent successfully!");
+        e.target.reset();
+      },
+      (error) => {
+        console.error("EmailJS ERROR:", error);
+        alert("❌ Failed to send message. Check console for details.");
+      }
+    );
+};
 
-    const to = "deysoham000@gmail.com";
 
-    window.location.href = `mailto:${encodeURIComponent(
-      to
-    )}?subject=${encodeURIComponent(subject)}&body=${encodeURIComponent(body)}`;
-  };
 
   return (
     <div className="app">
@@ -255,13 +267,13 @@ function App() {
                 <div className="hero-meta-item">
                   <span className="hero-meta-label">Focus</span>
                   <span className="hero-meta-value">
-                    Design Systems · Dashboards · SaaS
+                    Full-Stack Web Apps · API-Driven Systems · SaaS Platforms
                   </span>
                 </div>
                 <div className="hero-meta-item">
                   <span className="hero-meta-label">Toolset</span>
                   <span className="hero-meta-value">
-                    Figma · React · Framer Motion
+                    React · Node.js · Express.js · MongoDB · JavaScript · MySQL
                   </span>
                 </div>
               </div>
@@ -287,34 +299,37 @@ function App() {
                 </div>
 
                 <div className="orbit-card orbit-card--top">
-                  <div className="orbit-icon-pill">⚡</div>
+                  <div className="orbit-icon-pill">⚛️</div>
                   <div>
-                    <div className="orbit-tag">Micro-interactions</div>
+                    <div className="orbit-tag">React.js</div>
                     <div style={{ fontSize: "12px" }}>
-                      Hover, press, motion states
+                      Components · Hooks · SPA
                     </div>
                   </div>
                 </div>
+
 
                 <div className="orbit-card orbit-card--right">
-                  <div className="orbit-icon-pill">🎨</div>
+                  <div className="orbit-icon-pill">🚀</div>
                   <div>
-                    <div className="orbit-tag">Design Systems</div>
+                    <div className="orbit-tag">Node & Express</div>
                     <div style={{ fontSize: "12px" }}>
-                      Tokens, grids, components
+                      REST APIs · Backend Logic
                     </div>
                   </div>
                 </div>
 
+
                 <div className="orbit-card orbit-card--bottom">
-                  <div className="orbit-icon-pill">📊</div>
-                  <div>
-                    <div className="orbit-tag">Dashboard UI</div>
-                    <div style={{ fontSize: "12px" }}>
-                      Admin · SaaS · Analytics
+                   <div className="orbit-icon-pill">🧠</div>
+                    <div>
+                      <div className="orbit-tag">Problem Solving</div>
+                      <div style={{ fontSize: "12px" }}>
+                        Java · DSA · Logic
+                      </div>
                     </div>
-                  </div>
                 </div>
+
 
                 <span className="orbit-dot orbit-dot--1" />
                 <span className="orbit-dot orbit-dot--2" />
@@ -332,18 +347,22 @@ function App() {
             <div className="section-body">
               <div className="card">
                 <p className="about-text">
-                  I’m a <strong>UI/UX designer</strong> and{" "}
-                  <strong>frontend engineer</strong> who loves turning
-                  requirements into flows, wireframes, and production-ready
-                  interfaces. I care a lot about{" "}
-                  <strong>consistency, motion, and accessibility</strong>,
-                  making sure the experience feels fast and intuitive.
+                  I’m a <strong>MERN Stack Developer</strong> and <strong>frontend engineer</strong> who enjoys turning ideas into fast,
+                  scalable, and user-friendly web applications. I focus heavily on
+                  <strong> clean architecture, reusable components, and modern UI/UX practices</strong>,
+                  ensuring every product feels smooth, intuitive, and performance-optimized.
                 </p>
+
                 <p className="about-text" style={{ marginTop: "10px" }}>
-                  I’m comfortable collaborating with founders, PMs, and
-                  engineers — from <strong>idea</strong> to{" "}
-                  <strong>handoff</strong>. I enjoy working on complex
-                  dashboards, SaaS tools, and modern web products.
+                  I love solving real-world problems—whether it’s building dashboards,
+                  API-driven systems, or complete full-stack applications. I work comfortably across the entire product lifecycle:
+                  from <strong>planning, system design, and development</strong> to <strong>deployment and optimization</strong>.
+                </p>
+
+                <p className="about-text" style={{ marginTop: "10px" }}>
+                  Collaboration is important to me—I enjoy working with <strong>founders, product managers,</strong> and
+                  <strong> engineering teams</strong> to deliver production-ready solutions using technologies like
+                  <strong> React, Node.js, Express.js, MongoDB, Git/GitHub</strong>, and modern JavaScript tooling.
                 </p>
 
                 <div className="about-list">
@@ -353,15 +372,11 @@ function App() {
                   </div>
                   <div className="badge-pill">
                     <span className="badge-dot" />
-                    Remote &amp; async friendly
+                    Strong problem-solving mindset
                   </div>
                   <div className="badge-pill">
                     <span className="badge-dot" />
                     Open to full-time / freelance
-                  </div>
-                  <div className="badge-pill">
-                    <span className="badge-dot" />
-                    Comfortable with design critiques
                   </div>
                 </div>
               </div>
@@ -419,15 +434,7 @@ function App() {
                         className="project-btn project-btn--ghost"
                       >
                         View Details
-                      </a>
-                      <a
-                        href={project.demo}
-                        target="_blank"
-                        rel="noreferrer"
-                        className="project-btn project-btn--primary"
-                      >
-                        Live Demo
-                      </a>
+                      </a> 
                     </div>
                   </div>
                 </article>
@@ -445,10 +452,9 @@ function App() {
             <div className="contact-grid">
               {/* left: form */}
               <div className="card contact-card">
-                <h3 className="contact-title">Let’s work together</h3>
+                <h3 className="contact-title">Interested in hiring me?</h3>
                 <p className="contact-sub">
-                  Share a bit about your project or role and I&apos;ll get back
-                  to you as soon as possible.
+                  Share details about the role or opportunity — I’ll respond as soon as possible.
                 </p>
 
                 <form className="contact-form" onSubmit={handleContactSubmit}>
@@ -512,17 +518,20 @@ function App() {
               <div className="contact-side card">
                 <div className="contact-hello-badge">👋 Hello!</div>
                 <h3 className="contact-side-title">
-                  Open to UI/UX &amp; Frontend opportunities
+                  Open to MERN Stack & Frontend Engineering roles
                 </h3>
+
                 <p className="contact-side-text">
-                  I&apos;m currently looking for{" "}
-                  <strong>full-time roles, freelance projects,</strong> and
-                  collaborations on product-focused web apps.
+                  I’m currently seeking <strong>full-time opportunities, internships, freelance projects,</strong>
+                  and collaborations on modern web applications. I specialize in building fast,
+                  scalable, and user-friendly products using the MERN stack and modern frontend technologies.
                 </p>
+
                 <ul className="contact-list">
-                  <li>Product &amp; dashboard design</li>
-                  <li>Design systems &amp; component libraries</li>
-                  <li>React frontends with clean, accessible UI</li>
+                  <li>Full-stack development (MongoDB, Express, React, Node.js)</li>
+                  <li>Frontend engineering with clean & accessible UI</li>
+                  <li>API development & backend integration</li>
+                  <li>Performance optimization & problem solving</li>
                 </ul>
 
                 <div className="contact-side-meta">
@@ -570,7 +579,7 @@ function App() {
             </a>
 
             <a
-              href="https://www.linkedin.com/in/your-username"
+              href="https://www.linkedin.com/in/soham-kumar-dey-756b2a215/"
               target="_blank"
               rel="noreferrer"
               className="social-btn social-linkedin"
@@ -601,7 +610,7 @@ function App() {
             </a>
 
             <a
-              href="https://leetcode.com/your-username"
+              href="https://leetcode.com/u/soham_dey80/"
               target="_blank"
               rel="noreferrer"
               className="social-btn social-leetcode"
